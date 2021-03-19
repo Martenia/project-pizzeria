@@ -97,7 +97,7 @@
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       // console.log('accordionTrigger:', thisProduct.accordionTrigger);
       // console.log('form:', thisProduct.form);
-      console.log('formInputs:', thisProduct.formInputs);
+      // console.log('formInputs:', thisProduct.formInputs);
       // console.log('cartButton:', thisProduct.cartButton);
       // console.log('priceElem:', thisProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
@@ -233,6 +233,8 @@
       console.log('constructor arguments:', element);
 
       thisWidget.getElements(element);
+      thisWidget.initActions();
+      thisWidget.setValue(thisWidget.input.value);
     }
 
     getElements(element) {
@@ -242,6 +244,41 @@
       thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+
+    setValue(value) {
+      const thisWidget = this;
+
+      const newValue = parseInt(value);
+
+      /* todo: add validation */
+      if (thisWidget.value !== newValue && !isNaN(newValue)) {
+        thisWidget.value = newValue;
+      }
+        
+      thisWidget.input.value = thisWidget.value;
+    }
+
+    initActions() {
+      const thisWidget = this;
+      console.log('initActions');
+
+      // 1
+      thisWidget.input.addEventListener('change', function(){
+        thisWidget.setValue(thisWidget.value);
+      });
+      
+      // 2
+      thisWidget.linkDecrease.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value - 1);
+      });
+
+      // 3
+      thisWidget.linkIncrease.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value + 1);
+      });
     }
   }
 
