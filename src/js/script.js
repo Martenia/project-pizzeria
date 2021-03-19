@@ -63,6 +63,7 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
+      thisProduct.initAmountWidget();
       thisProduct.processOrder();
 
       // console.log('new Product:', thisProduct);
@@ -96,11 +97,13 @@
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       // console.log('accordionTrigger:', thisProduct.accordionTrigger);
       // console.log('form:', thisProduct.form);
-      // console.log('formInputs:', thisProduct.formInputs);
+      console.log('formInputs:', thisProduct.formInputs);
       // console.log('cartButton:', thisProduct.cartButton);
       // console.log('priceElem:', thisProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-      console.log('imageWrapper:', thisProduct.imageWrapper);
+      // console.log('imageWrapper:', thisProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
+      console.log('amountWidgetElem:', thisProduct.amountWidgetElem);
     }
 
     initAccordion() {
@@ -160,7 +163,7 @@
 
       // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
+      // console.log('formData', formData);
 
       // set price to default price
       let price = thisProduct.data.price;
@@ -169,13 +172,13 @@
       for (let paramId in thisProduct.data.params) {
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         const param = thisProduct.data.params[paramId];
-        console.log(paramId, param);
+        // console.log(paramId, param);
 
         // for every option in this category
         for (let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          console.log(optionId, option);
+          // console.log(optionId, option);
 
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
 
@@ -196,7 +199,7 @@
 
           // find image with class .paramId-optionId in div with images
           const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
-          console.log(optionImage);
+          // console.log(optionImage);
 
           // adding images loop
           if (optionImage) {
@@ -214,8 +217,34 @@
 
     }
 
+    initAmountWidget() {
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    }
+
   }
   
+  class AmountWidget {
+    constructor(element) {
+      const thisWidget = this;
+
+      console.log('AmountWidget:', thisWidget);
+      console.log('constructor arguments:', element);
+
+      thisWidget.getElements(element);
+    }
+
+    getElements(element) {
+      const thisWidget = this;
+
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+  }
+
 
   const app = {
 
