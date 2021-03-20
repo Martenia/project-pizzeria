@@ -303,7 +303,7 @@
 
     initActions() {
       const thisWidget = this;
-      console.log('initActions');
+      // console.log('initActions');
 
       // 1
       thisWidget.input.addEventListener('change', function(){
@@ -338,6 +338,7 @@
       thisCart.products = [];
 
       thisCart.getElements(element);
+      thisCart.initActions(); // show and hide cart (2)
 
       console.log('new Cart:', thisCart);
     }
@@ -348,13 +349,25 @@
       thisCart.dom = {};
 
       thisCart.dom.wrapper = element;
+
+      // show and hide cart (1)
+      thisCart.dom.toggleTrigger = element.querySelector(select.cart.toggleTrigger);
+    }
+
+    initActions() {  // show and hide cart (2)
+      const thisCart = this;  // show and hide cart (3)
+      console.log('initActions');
+
+      thisCart.dom.toggleTrigger.addEventListener('click', function(){  // show and hide cart (3)
+        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);  // show and hide cart (4)
+      });
     }
   }
 
   const app = {
 
-    initMenu: function() {
-      const thisApp = this;
+    initMenu: function() { 
+      const thisApp = this; 
       console.log('thisApp.data:', thisApp.data);
 
       for (let productData in thisApp.data.products) {
@@ -368,6 +381,13 @@
       thisApp.data = dataSource;
     },
 
+    initCart: function() {
+      const thisApp = this;
+
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
+    },
+
     init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
@@ -378,6 +398,7 @@
 
       thisApp.initData();
       thisApp.initMenu();
+      thisApp.initCart();
     },
   };
 
