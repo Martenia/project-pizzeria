@@ -225,7 +225,7 @@
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
 
       thisProduct.amountWidgetElem.addEventListener('updated', function(){
-        thisProduct.processOrder(); // ?????????????
+        thisProduct.processOrder(); 
       });
     }
 
@@ -239,7 +239,7 @@
       console.log('constructor arguments:', element);
 
       thisWidget.getElements(element);
-      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.setValue(settings.amountWidget.defaultValue);
       thisWidget.initActions();
     }
 
@@ -256,12 +256,12 @@
       const thisWidget = this;
 
       const newValue = parseInt(value);
-      thisWidget.value = settings.amountWidget.defaultValue;
+      
 
       /* todo: add validation */
       if (thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
         thisWidget.value = newValue;
-        thisWidget.announce(); // ??????????
+        thisWidget.announce();
       }
         
       thisWidget.input.value = thisWidget.value;
