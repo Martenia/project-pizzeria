@@ -408,7 +408,6 @@
       const thisCart = this;
 
       thisCart.dom = {};
-
       thisCart.dom.wrapper = element;
 
       // show and hide cart (1)
@@ -443,9 +442,6 @@
 
       // generate DOM elements (3)      
       thisCart.dom.productList.appendChild(generatedDOM);
-
-
-
     }
   }
 
