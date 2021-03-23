@@ -387,7 +387,9 @@
     announce() {
       const thisWidget = this;
 
-      const event = new Event ('updated');
+      const event = new CustomEvent ('updated', {
+        bubles: true
+      });
       thisWidget.element.dispatchEvent(event);
     }
   }
@@ -428,6 +430,10 @@
 
       thisCart.dom.toggleTrigger.addEventListener('click', function(){  // show and hide cart (3)
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);  // show and hide cart (4)
+      });
+
+      thisCart.dom.productList.addEventListener('updated', function() {
+        thisCart.update();
       });
     }
 
