@@ -334,7 +334,7 @@
       // console.log('constructor arguments:', element);
 
       thisWidget.getElements(element);
-      thisWidget.setValue(settings.amountWidget.defaultValue);
+      thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions();
     }
 
@@ -350,7 +350,9 @@
     setValue(value) {
       const thisWidget = this;
 
-      const newValue = parseInt(value);      
+      const newValue = parseInt(value);
+      
+      thisWidget.value = settings.amountWidget.defaultValue;
 
       /* todo: add validation */
       if (thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
