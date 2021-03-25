@@ -433,6 +433,38 @@
       thisCart.dom.address = element.querySelector(select.cart.address);
     }
 
+    sendOrder() {
+      const thisCart = this;
+
+      const url = settings.db.url + '/' + settings.db.order;
+
+      const payload = {
+        address: thisCart.dom.address.value,
+        phone: thisCart.dom.phone.value,
+        totalPrice: thisCart.totalPrice,
+        subTotalPrice: thisCart.subTotalPrice,
+        totalNumber: thisCart.totalNumber,
+        deliveryFee: thisCart.deliveryFee,
+        products: [],
+      };
+
+      console.log('payload:', payload);
+
+      for(let prod of thisCart.products) {
+        payload.products.push(prod.getData());
+      }
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+      
+      fetch(url, options);
+    }
+
     initActions() {  // show and hide cart (2)
       const thisCart = this;  // show and hide cart (3)
       console.log('initActions');
@@ -527,37 +559,6 @@
         
     }
 
-    sendOrder() {
-      const thisCart = this;
-
-      const url = settings.db.url + '/' + settings.db.order;
-
-      const payload = {
-        address: thisCart.dom.address.value,
-        phone: thisCart.dom.phone.value,
-        totalPrice: thisCart.totalPrice,
-        subTotalPrice: thisCart.subTotalPrice,
-        totalNumber: thisCart.totalNumber,
-        deliveryFee: thisCart.deliveryFee,
-        products: [],
-      };
-
-      console.log('payload:', payload);
-
-      for(let prod of thisCart.products) {
-        payload.products.push(prod.getData());
-      }
-
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      };
-      
-      fetch(url, options);
-    }
   }
 
   class CartProduct {
