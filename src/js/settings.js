@@ -4,10 +4,13 @@ export const select = {
   templateOf: {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product', // CODE ADDED
+    bookingWidget: '#template-booking-widget', // new
   },
   containerOf: {
     menu: '#product-list',
     cart: '#cart',
+    pages: '#pages', // new
+    booking: '.booking-wrapper', // new
   },
   all: {
     menuProducts: '#product-list > .product',
@@ -28,6 +31,15 @@ export const select = {
       linkDecrease: 'a[href="#less"]',
       linkIncrease: 'a[href="#more"]',
     },
+    datePicker: { // start new
+      wrapper: '.date-picker',
+      input: `input[name="date"]`,
+    },
+    hourPicker: {
+      wrapper: '.hour-picker',
+      input: 'input[type="range"]',
+      output: '.output',
+    }, // end new
   },
   // CODE ADDED START
   cart: {
@@ -48,6 +60,14 @@ export const select = {
     edit: '[href="#edit"]',
     remove: '[href="#remove"]',
   },
+  booking: { // start new
+    peopleAmount: '.people-amount',
+    hoursAmount: '.hours-amount',
+    tables: '.floor-plan .table',
+  },
+  nav: {
+    links: '.main-nav a',
+  }, // end new
   // CODE ADDED END
 };
 
@@ -60,22 +80,48 @@ export const classNames = {
   cart: {
     wrapperActive: 'active',
   },
+  booking: { // start new
+    loading: 'loading',
+    tableBooked: 'booked',
+  },
+  nav: {
+    active: 'active',
+  },
+  pages: {
+    active: 'active',
+  }, // end new
   // CODE ADDED END
 };
 export const settings = {
+  hours: { // start new
+    open: 12,
+    close: 24,
+  }, // end new
   amountWidget: {
     defaultValue: 1,
     defaultMin: 1,
     defaultMax: 9,
   }, // CODE CHANGED
+  datePicker: { // start new
+    maxDaysInFuture: 14,
+  }, // end new
   // CODE ADDED START
   cart: {
     defaultDeliveryFee: 20,
   },
+  booking: { // start new
+    tableIdAttribute: 'data-table',
+  }, // end new
   db: {
     url: '//localhost:3131',
     product: 'product',
     order: 'order',
+    booking: 'booking', // start new
+    event: 'event',
+    dateStartParamKey: 'date_gte',
+    dateEndParamKey: 'date_lte',
+    notRepeatParam: 'repeat=false',
+    repeatParam: 'repeat_ne=false', // end new
   },
   // CODE ADDED END
 };
@@ -85,4 +131,5 @@ export const templates = {
   // CODE ADDED START
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   // CODE ADDED END
+  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML), // new
 };
