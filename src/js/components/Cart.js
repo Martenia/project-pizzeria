@@ -11,7 +11,7 @@ class Cart {
     thisCart.getElements(element);
     thisCart.initActions(); // show and hide cart (2)
 
-    console.log('new Cart:', thisCart);
+    // console.log('new Cart:', thisCart);
   }
 
   getElements(element) {
@@ -69,7 +69,7 @@ class Cart {
 
   initActions() {  // show and hide cart (2)
     const thisCart = this;  // show and hide cart (3)
-    console.log('initActions');
+    // console.log('initActions');
 
     thisCart.dom.toggleTrigger.addEventListener('click', function(){  // show and hide cart (3)
       thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);  // show and hide cart (4)
@@ -150,7 +150,6 @@ class Cart {
     }
 
     console.log('totalPrice:', thisCart.totalPrice);
-
 
     thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
     thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
