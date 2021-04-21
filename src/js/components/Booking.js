@@ -13,7 +13,8 @@ class Booking {
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
-    thisBooking.initTables();
+    thisBooking.tableInfo = '';
+    // thisBooking.initTables();
   }
 
   getData() {
@@ -147,6 +148,9 @@ class Booking {
         tableId = parseInt(tableId);
       }
 
+      table.classList.remove('selected');
+      thisBooking.tableInfo = null;
+
       if (
         !allAvailable &&
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(table) > -1
@@ -161,44 +165,31 @@ class Booking {
 
   initTables() {
     const thisBooking = this;
-    // thisBooking.tableInfo = '';
+    
+    const tableId = parseInt(event.target.getAttribute(settings.booking.tableIdAttribute));
+    if (tableId) {
+      if(!event.target.classList.contains('booked')){
+        thisBooking.tableInfo = tableId;
+        
+      }else{
+        alert('Stolik jest zajęty');
+      }
 
-    for (let table of thisBooking.dom.tables) {
-      table.addEventListener('click', event => { 
-        if (event.target.className === 'booked') { 
-          alert('Stolik zajęty!');
+      for(let table of thisBooking.dom.tables){
+        table.classList.remove('selected');
+        if (!event.target.classList.contains('booked') && thisBooking.tableInfo == tableId){
+          event.target.classList.add('selected');
+          thisBooking.tableInfo = tableId;
+        }else{
+          thisBooking.reservationTable = null;
+          event.target.classList.remove('selected');
         }
-        else {
-          table.classList.add('selected');
-          const tableNo = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
-          thisBooking.tableInfo = tableNo;
-          if (thisBooking.tableInfo === tableNo) {
-            table.classList.remove('selected');            
-          }
-        }
-        console.log('thisBooking.tableInfo:', thisBooking.tableInfo);
-      });
+      }
+      if(!event.target.classList.contains('selected')){
+        thisBooking.tableInfo = null;
+      }
     }
-    
-    /*  for (let table of thisBooking.dom.tables) {
-      table.addEventListener('click', function(event) {
-        event.preventDefault();
-
-       */
-    
-    /*         if (table.classList.contains('booked')) {
-          alert('Stolik zajęty!');
-        } else {
-          table.classList.add('selected');
-          const tableNo = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
-          thisBooking.tableInfo = tableNo;
-          if (thisBooking.tableInfo === tableNo) {
-            table.classList.remove('selected');
-          }
-        } 
-        console.log('thisBooking.tableInfo:', thisBooking.tableInfo);
-      }); */
-    
+    console.log('thisBooking.tableInfo:', thisBooking.tableInfo);
   }
 
   sendBooking() {
@@ -257,7 +248,11 @@ class Booking {
     thisBooking.dom.address = element.querySelector(select.cart.address);
     thisBooking.dom.starters = element.querySelectorAll('[name="starter"]');
 
+    thisBooking.dom.floor = element.querySelector('.floor-plan');
+
     thisBooking.dom.form = element.querySelector('.booking-form');
+    // thisBooking.dom.form = element.querySelector('[type="submit"]');
+    
     console.log('thisBooking.dom.form:', thisBooking.dom.form);
   }
 
@@ -273,11 +268,11 @@ class Booking {
       thisBooking.updateDom();
     });
     
-    /* thisBooking.dom.wrapper.addEventListener('click', function(event) {
+    thisBooking.dom.floor.addEventListener('click', function(event) {
       event.preventDefault();
       thisBooking.initTables();
-    });  */
-
+    });
+    
     thisBooking.dom.form.addEventListener('submit', function (event) {
       event.preventDefault();
       thisBooking.sendBooking();
