@@ -1,0 +1,181 @@
+.home-wrapper {
+  margin: ($base-size * 3.5) auto;
+  padding: ($base-size * 6) ($base-size * 4);
+  background: $color-light;
+  border-bottom: 1px solid lighten($color-dark, 70%);
+  border-radius: $radius;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.opening-hours {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 100px;
+  border-radius: $radius;
+  height: 120px;
+  width: 605px;
+  background-color: $color-main;
+  color: white;
+  justify-content: center;
+}
+
+.home-widget h3 {
+  font-size: 28px;
+  margin: 0;
+  font-family: $font-header;
+}
+
+.home-widget p {
+  font-size: 14px;
+  margin: 0;
+  font-family: $font-header;
+}
+
+.box {
+  width: 300px;
+  height: 120px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  border-radius: $radius;
+}
+
+.information {
+  display: none;  
+}
+
+.box h3:hover + .information {
+  display: block;
+  opacity: 0.9;
+  transition: all 1s;
+}
+
+.box h3:hover::after {
+  transition: all 1s ease-in-out;
+}
+
+.order-online {
+  background-image: url(../images/assets/pizza-1.jpg);
+  color: white;
+  cursor: pointer;
+}
+
+.book-a-table{
+  background-image: url(../images/assets/pizza-2.jpg);
+  color: white;
+  cursor: pointer;
+}
+
+.carousel {
+  background: white;
+}
+
+.carousel h3 {
+  font-size: 20px;
+  margin: 5px 0;
+  font-weight: $font-semibold;
+  font-family: $font-header;
+}
+
+.carousel p {
+  font-size: 14px;
+  font-family: $font-text;
+  margin-top: 10px;
+}
+
+.carousel-cell {
+  width: 99%;
+  height: 200px;
+  margin-right: 10px;
+  border-radius: $radius;
+  counter-increment: gallery-cell;
+  display: flex;
+}
+
+.img {
+  margin-right: 20px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: $radius;
+}
+
+.home-gallery {
+  margin-top: 100px;
+  width: 100%;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.cell-gallery {
+  display: flex;
+  align-items: stretch;
+}
+
+.img-gallery {
+  border-radius: $radius;
+  object-fit: cover;
+  width: 190px;
+  height: 190px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.img-cell {
+  flex-grow: 1;
+  margin: 5px;
+  position: relative;
+}
+
+.insta {
+  margin-top: 35px;
+}
+
+.insta a:link {
+  color: $color-main;
+}
+
+.insta a:visited {
+  color: $color-main;
+}
+
+.awesome {
+  display: none;
+  position: absolute;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 190px;
+  height: 190px;
+  top: 0;
+  left: 0;
+  border-radius: $radius;
+  color: white;
+  font-size: 30px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 70px 0;
+  transition: .5s ease;  
+}
+
+.img-gallery:hover + .awesome {
+  display: block;
+}
+
+i.fas {
+  margin: 5px;
+}
+
+.fas:hover {
+  color: $color-main;
+}

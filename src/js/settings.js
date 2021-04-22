@@ -5,6 +5,7 @@ export const select = {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product', // CODE ADDED
     bookingWidget: '#template-booking-widget', // new
+    home: '#template-home', // home
   },
   containerOf: {
     menu: '#product-list',
@@ -64,11 +65,18 @@ export const select = {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
+    starters: '[name="starter"]',
+    floor: '.floor-plan',
+    form: '.booking-form',
   },
   nav: {
     links: '.main-nav a',
   }, // end new
   // CODE ADDED END
+  home: {
+    order: '.order-online',
+    booking: '.book-a-table',
+  }
 };
 
 export const classNames = {
@@ -83,6 +91,7 @@ export const classNames = {
   booking: { // start new
     loading: 'loading',
     tableBooked: 'booked',
+    tableSelected: 'selected',
   },
   nav: {
     active: 'active',
@@ -132,4 +141,5 @@ export const templates = {
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   // CODE ADDED END
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML), // new
+  home: Handlebars.compile(document.querySelector(select.templateOf.home).innerHTML), // home
 };

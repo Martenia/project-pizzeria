@@ -148,7 +148,7 @@ class Booking {
         tableId = parseInt(tableId);
       }
 
-      table.classList.remove('selected');
+      table.classList.remove(classNames.booking.tableSelected);
       thisBooking.tableInfo = null;
 
       if (
@@ -168,7 +168,7 @@ class Booking {
     
     const tableId = parseInt(event.target.getAttribute(settings.booking.tableIdAttribute));
     if (tableId) {
-      if(!event.target.classList.contains('booked')){
+      if(!event.target.classList.contains(classNames.booking.tableBooked)){
         thisBooking.tableInfo = tableId;
         
       }else{
@@ -176,16 +176,16 @@ class Booking {
       }
 
       for(let table of thisBooking.dom.tables){
-        table.classList.remove('selected');
-        if (!event.target.classList.contains('booked') && thisBooking.tableInfo == tableId){
-          event.target.classList.add('selected');
+        table.classList.remove(classNames.booking.tableSelected);
+        if (!event.target.classList.contains(classNames.booking.tableBooked) && thisBooking.tableInfo == tableId){
+          event.target.classList.add(classNames.booking.tableSelected);
           thisBooking.tableInfo = tableId;
         }else{
           thisBooking.reservationTable = null;
-          event.target.classList.remove('selected');
+          event.target.classList.remove(classNames.booking.tableSelected);
         }
       }
-      if(!event.target.classList.contains('selected')){
+      if(!event.target.classList.contains(classNames.booking.tableSelected)){
         thisBooking.tableInfo = null;
       }
     }
@@ -246,11 +246,11 @@ class Booking {
 
     thisBooking.dom.phone = element.querySelector(select.cart.phone);
     thisBooking.dom.address = element.querySelector(select.cart.address);
-    thisBooking.dom.starters = element.querySelectorAll('[name="starter"]');
+    thisBooking.dom.starters = element.querySelectorAll(select.booking.starters);
 
-    thisBooking.dom.floor = element.querySelector('.floor-plan');
+    thisBooking.dom.floor = element.querySelector(select.booking.floor);
 
-    thisBooking.dom.form = element.querySelector('.booking-form');
+    thisBooking.dom.form = element.querySelector(select.booking.form);
     // thisBooking.dom.form = element.querySelector('[type="submit"]');
     
     console.log('thisBooking.dom.form:', thisBooking.dom.form);
