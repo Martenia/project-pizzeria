@@ -168,12 +168,12 @@
   transition: .5s ease;  
 }
 
-.img-gallery:hover + .awesome {
-  display: block;
-}
-
 i.fas {
   margin: 5px;
+}
+
+.img-cell:hover .awesome {
+  display: block;
 }
 
 .fas:hover {
